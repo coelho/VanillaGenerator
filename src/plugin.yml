@@ -1,0 +1,4 @@
+name: VanillaGenerator
+main: vanillagenerator.VanillaGenerator
+version: 1
+load: STARTUP
