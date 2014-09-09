@@ -26,7 +26,7 @@ public class ProxyBlockPopulator extends BlockPopulator {
 	public void populate(World world, Random random, Chunk chunk) {
 		net.minecraft.server.v1_7_10.apx nmsChunk = this.nmsChunks.remove(LongHash.toLong(chunk.getX(), chunk.getZ()));
 		if (nmsChunk == null) {
-			return;
+			nmsChunk = nmsGenerator.c(chunk.getX(), chunk.getZ());
 		}
 		net.minecraft.server.v1_7_10.apz[] nmsChunkSections = nmsChunk.i();
 		net.minecraft.server.v1_7_10.apz nmsChunkSection;

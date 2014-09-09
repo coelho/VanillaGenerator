@@ -47,7 +47,7 @@ public class NMSDummyChunkProvider implements apu {
 	}
 
 	public apx c(int x, int y) {
-		if(this.chunk == null) {
+		if (this.chunk == null) {
 			return null;
 		}
 		if (this.chunk.g != x || this.chunk.h != y) {
@@ -56,7 +56,7 @@ public class NMSDummyChunkProvider implements apu {
 		return this.chunk;
 	}
 
-	public boolean a(int arg0, int arg1) {
+	public boolean a(int x, int y) {
 		return false;
 	}
 

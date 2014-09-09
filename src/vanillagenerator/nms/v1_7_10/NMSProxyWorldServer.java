@@ -30,8 +30,8 @@ public class NMSProxyWorldServer extends net.minecraft.server.v1_7_10.mt {
 	}
 
 	@Override
-	public int f(int x, int y) {
-		return world.getHighestBlockYAt(x, y);
+	public int f(int x, int z) {
+		return world.getHighestBlockYAt(x, z);
 	}
 
 	@Override
