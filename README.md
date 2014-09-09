@@ -13,6 +13,8 @@ ChunkGenerator for the Bukkit API that uses NMS for vanilla terrain generation.
 
 ### Usage ###
 
+This plugin depends on VanillaNMS. Be sure to setup VanillaNMS properly, and include the NMS jar of the version you are targetting.
+
 In your glowstone.yml, for example, set the following:
 ```
 worlds:
@@ -20,8 +22,3 @@ worlds:
     generator: VanillaGenerator:v1_7_10,normal
 ```
 There are two parameters after the generator name. v1_7_10 is the version of Minecraft that we will be using to generate, and normal is the environment type.
-
-When running your server, be sure to include the Minecraft Server in the class path:
-```
-$ java -cp minecraftServer.jar:glowstone.jar net.glowstone.GlowServer
-```
