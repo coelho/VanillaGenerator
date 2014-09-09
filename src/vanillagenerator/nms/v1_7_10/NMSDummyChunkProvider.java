@@ -57,7 +57,13 @@ public class NMSDummyChunkProvider implements apu {
 	}
 
 	public boolean a(int x, int y) {
-		return false;
+		if (this.chunk == null) {
+			return false;
+		}
+		if (this.chunk.g != x || this.chunk.h != y) {
+			return false;
+		}
+		return true;
 	}
 
 	public void e(int arg0, int arg1) {
