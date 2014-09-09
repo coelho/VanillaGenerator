@@ -52,6 +52,11 @@ public class NMSProxyWorldServer extends net.minecraft.server.v1_7_10.mt {
 		}
 		return null;
 	}
+	
+	@Override
+	public void e(int x, int y, int z, net.minecraft.server.v1_7_10.aji paramaji) {
+		// dummy - block updates?
+	}
 
 	@Override
 	public boolean d(net.minecraft.server.v1_7_10.sa arg0) {

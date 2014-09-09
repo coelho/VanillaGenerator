@@ -31,7 +31,11 @@ public class NMSProxyTileMobSpawner extends net.minecraft.server.v1_7_10.apj {
 		
 		@Override
 		public void a(String mob) {
-			creatureSpawner.setSpawnedType(EntityType.valueOf(mob.toUpperCase()));
+			mob = mob.toUpperCase();
+			if(mob.equals("CAVESPIDER")) {
+				mob = "CAVE_SPIDER";
+			}
+			creatureSpawner.setSpawnedType(EntityType.valueOf(mob));
 		}
 
 	}

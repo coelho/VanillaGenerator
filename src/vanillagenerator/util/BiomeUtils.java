@@ -13,7 +13,7 @@ public class BiomeUtils {
 			input = input.replace("+", " Plus");
 		}
 		if (input.contains(" ")) {
-			return input.toUpperCase().replace(' ', '_');
+			return specialCase(input.toUpperCase().replace(' ', '_'));
 		}
 		StringBuilder builder = new StringBuilder();
 		char[] chars = input.toCharArray();
@@ -25,7 +25,14 @@ public class BiomeUtils {
 			}
 			builder.append(Character.toUpperCase(chars[i]));
 		}
-		return builder.toString();
+		return specialCase(builder.toString());
+	}
+	
+	private static final String specialCase(String input) {
+		if(input.equals("MUSHROOM_ISLAND_SHORE")) {
+			return "MUSHROOM_SHORE";
+		}
+		return input;
 	}
 	
 }

@@ -48,6 +48,7 @@ public class ProxyChunkGenerator extends ChunkGenerator {
 				ReflectionUtils.setFinalField(nmsWorld.getClass().getSuperclass().getSuperclass(), nmsWorld, "x", nmsWorldData);
 				ReflectionUtils.setFinalField(nmsWorldData.getClass(), nmsWorldData, "a", world.getSeed());
 				ReflectionUtils.setFinalField(nmsWorldData.getClass(), nmsWorldData, "b", net.minecraft.server.v1_7_10.ahm.a(world.getWorldType().getName()));
+				ReflectionUtils.setFinalField(nmsWorldData.getClass(), nmsWorldData, "t", world.canGenerateStructures());
 				net.minecraft.server.v1_7_10.aqo nmsWorldProvider = net.minecraft.server.v1_7_10.aqo.a(this.envrionment.getId());
 				nmsWorldProvider.a(nmsWorld);
 				ReflectionUtils.setFinalField(nmsWorld.getClass().getSuperclass().getSuperclass(), nmsWorld, "t", nmsWorldProvider);
