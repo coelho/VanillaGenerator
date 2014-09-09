@@ -1,15 +1,15 @@
-package vanillagenerator.nms.v17;
+package vanillagenerator.nms.v1_7_10;
 
 import org.bukkit.block.CreatureSpawner;
 import org.bukkit.entity.EntityType;
 
-public class NMSProxyTileMobSpawner extends net.minecraft.server.TileEntityMobSpawner {
+public class NMSProxyTileMobSpawner extends net.minecraft.server.v1_7_10.apj {
 
 	private CreatureSpawner creatureSpawner;
 	
-	public class NMSProxyMobSpawner extends net.minecraft.server.MobSpawnerAbstract {
+	public class NMSProxyMobSpawner extends net.minecraft.server.v1_7_10.agq {
 		
-		public net.minecraft.server.World a() {
+		public net.minecraft.server.v1_7_10.ahb a() {
 			return null;
 		}
 
@@ -29,10 +29,6 @@ public class NMSProxyTileMobSpawner extends net.minecraft.server.TileEntityMobSp
 			return 0;
 		}
 		
-		public void a(net.minecraft.server.TileEntityMobSpawnerData paramTileEntityMobSpawnerData) {
-			
-		}
-		
 		@Override
 		public void a(String mob) {
 			creatureSpawner.setSpawnedType(EntityType.valueOf(mob.toUpperCase()));
@@ -45,7 +41,7 @@ public class NMSProxyTileMobSpawner extends net.minecraft.server.TileEntityMobSp
 	}
 	
 	@Override
-	public net.minecraft.server.MobSpawnerAbstract a() {
+	public net.minecraft.server.v1_7_10.agq a() {
 		return new NMSProxyMobSpawner();
 	}
 	
