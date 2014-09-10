@@ -6,6 +6,7 @@ ChunkGenerator for the Bukkit API that uses NMS for vanilla terrain generation.
 ### Dependencies ###
 
 * [VanillaNMS](https://github.com/coelho/vanillanms)
+  * (optional) Minecraft Server 1.8 refactored
   * (optional) Minecraft Server 1.7.10 refactored
   * (optional) Minecraft Server Alpha 1.2.6 refactored
   * (optional) Minecraft Server Alpha 1.1.2.1 refactored
