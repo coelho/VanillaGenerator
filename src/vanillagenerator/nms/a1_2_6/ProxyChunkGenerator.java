@@ -26,9 +26,30 @@ public class ProxyChunkGenerator extends ChunkGenerator {
 		this.envrionment = envrionment;
 	}
 	
-	@SuppressWarnings({ "rawtypes", "deprecation" })
 	@Override
 	public byte[] generate(World world, Random random, int x, int z) {
+		if(!ensureNms(world)) {
+			return null;
+		}
+
+		// generation
+		net.minecraft.server.a1_2_6.ju nmsChunk = nmsGenerator.b(x, z);
+
+		// block populator
+		blockPopulator.addChunk(nmsChunk);
+
+		return nmsChunk.b;
+	}
+
+	public List<BlockPopulator> getDefaultPopulators(World world) {
+		if(!ensureNms(world)) {
+			return null;
+		}
+		return Arrays.asList((BlockPopulator) blockPopulator);
+	}
+	
+	@SuppressWarnings({ "rawtypes", "deprecation" })
+	public boolean ensureNms(World world) {
 		if (!nms) {
 			try {
 				nmsWorld = ReflectionUtils.newInstanceNoInit(NMSProxyWorldServer.class);
@@ -50,22 +71,11 @@ public class ProxyChunkGenerator extends ChunkGenerator {
 				blockPopulator.nmsChunkProvider = nmsChunkProvider;
 			} catch(Exception exception) {
 				exception.printStackTrace();
-				return null;
+				return false;
 			}
 			nms = true;
 		}
-		
-		// generation
-		net.minecraft.server.a1_2_6.ju nmsChunk = nmsGenerator.b(x, z);
-
-		// block populator
-		blockPopulator.addChunk(nmsChunk);
-
-		return nmsChunk.b;
-	}
-
-	public List<BlockPopulator> getDefaultPopulators(World world) {
-		return Arrays.asList((BlockPopulator) blockPopulator);
+		return true;
 	}
 	
 }

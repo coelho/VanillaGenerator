@@ -32,35 +32,10 @@ public class ProxyChunkGenerator extends ChunkGenerator {
 		this.envrionment = envrionment;
 	}
 	
-	@SuppressWarnings({ "rawtypes", "deprecation" })
 	@Override
 	public short[][] generateExtBlockSections(World world, Random random, int x, int z, BiomeGrid biomes) {
-		if (!nms) {
-			try {
-				nmsWorld = ReflectionUtils.newInstanceNoInit(NMSProxyWorldServer.class);
-				ReflectionUtils.setFinalField(nmsWorld.getClass(), nmsWorld, "world", world);
-				net.minecraft.server.v1_7_10.ays nmsWorldData = ReflectionUtils.newInstanceNoInit(net.minecraft.server.v1_7_10.ays.class);
-				ReflectionUtils.setFinalField(nmsWorld.getClass().getSuperclass().getSuperclass(), nmsWorld, "s", new Random());
-				ReflectionUtils.setFinalField(nmsWorld.getClass().getSuperclass().getSuperclass(), nmsWorld, "u", new ArrayList());
-				NMSDummyChunkProvider nmsChunkProvider = new NMSDummyChunkProvider();
-				ReflectionUtils.setFinalField(nmsWorld.getClass().getSuperclass().getSuperclass(), nmsWorld, "v", nmsChunkProvider);
-				ReflectionUtils.setFinalField(nmsWorld.getClass().getSuperclass().getSuperclass(), nmsWorld, "z", ReflectionUtils.newInstanceNoInit(NMSDummyPersistentCollection.class));
-				ReflectionUtils.setFinalField(nmsWorld.getClass().getSuperclass().getSuperclass(), nmsWorld, "x", nmsWorldData);
-				ReflectionUtils.setFinalField(nmsWorldData.getClass(), nmsWorldData, "a", world.getSeed());
-				ReflectionUtils.setFinalField(nmsWorldData.getClass(), nmsWorldData, "b", net.minecraft.server.v1_7_10.ahm.a(world.getWorldType().getName()));
-				ReflectionUtils.setFinalField(nmsWorldData.getClass(), nmsWorldData, "t", world.canGenerateStructures());
-				net.minecraft.server.v1_7_10.aqo nmsWorldProvider = net.minecraft.server.v1_7_10.aqo.a(this.envrionment.getId());
-				nmsWorldProvider.a(nmsWorld);
-				ReflectionUtils.setFinalField(nmsWorld.getClass().getSuperclass().getSuperclass(), nmsWorld, "t", nmsWorldProvider);
-				nmsGenerator = nmsWorldProvider.c();
-				blockPopulator.nmsGenerator = nmsGenerator;
-				blockPopulator.nmsWorld = nmsWorld;
-				blockPopulator.nmsChunkProvider = nmsChunkProvider;
-			} catch(Exception exception) {
-				exception.printStackTrace();
-				return null;
-			}
-			nms = true;
+		if(!ensureNms(world)) {
+			return null;
 		}
 		
 		// generation
@@ -100,7 +75,42 @@ public class ProxyChunkGenerator extends ChunkGenerator {
 	}
 	
 	public List<BlockPopulator> getDefaultPopulators(World world) {
+		if(!ensureNms(world)) {
+			return null;
+		}
 		return Arrays.asList((BlockPopulator) blockPopulator);
+	}
+	
+	@SuppressWarnings({ "rawtypes", "deprecation" })
+	private boolean ensureNms(World world) {
+		if (!nms) {
+			try {
+				nmsWorld = ReflectionUtils.newInstanceNoInit(NMSProxyWorldServer.class);
+				ReflectionUtils.setFinalField(nmsWorld.getClass(), nmsWorld, "world", world);
+				net.minecraft.server.v1_7_10.ays nmsWorldData = ReflectionUtils.newInstanceNoInit(net.minecraft.server.v1_7_10.ays.class);
+				ReflectionUtils.setFinalField(nmsWorld.getClass().getSuperclass().getSuperclass(), nmsWorld, "s", new Random());
+				ReflectionUtils.setFinalField(nmsWorld.getClass().getSuperclass().getSuperclass(), nmsWorld, "u", new ArrayList());
+				NMSDummyChunkProvider nmsChunkProvider = new NMSDummyChunkProvider();
+				ReflectionUtils.setFinalField(nmsWorld.getClass().getSuperclass().getSuperclass(), nmsWorld, "v", nmsChunkProvider);
+				ReflectionUtils.setFinalField(nmsWorld.getClass().getSuperclass().getSuperclass(), nmsWorld, "z", ReflectionUtils.newInstanceNoInit(NMSDummyPersistentCollection.class));
+				ReflectionUtils.setFinalField(nmsWorld.getClass().getSuperclass().getSuperclass(), nmsWorld, "x", nmsWorldData);
+				ReflectionUtils.setFinalField(nmsWorldData.getClass(), nmsWorldData, "a", world.getSeed());
+				ReflectionUtils.setFinalField(nmsWorldData.getClass(), nmsWorldData, "b", net.minecraft.server.v1_7_10.ahm.a(world.getWorldType().getName()));
+				ReflectionUtils.setFinalField(nmsWorldData.getClass(), nmsWorldData, "t", world.canGenerateStructures());
+				net.minecraft.server.v1_7_10.aqo nmsWorldProvider = net.minecraft.server.v1_7_10.aqo.a(this.envrionment.getId());
+				nmsWorldProvider.a(nmsWorld);
+				ReflectionUtils.setFinalField(nmsWorld.getClass().getSuperclass().getSuperclass(), nmsWorld, "t", nmsWorldProvider);
+				nmsGenerator = nmsWorldProvider.c();
+				blockPopulator.nmsGenerator = nmsGenerator;
+				blockPopulator.nmsWorld = nmsWorld;
+				blockPopulator.nmsChunkProvider = nmsChunkProvider;
+			} catch(Exception exception) {
+				exception.printStackTrace();
+				return false;
+			}
+			nms = true;
+		}
+		return true;
 	}
 	
 }
