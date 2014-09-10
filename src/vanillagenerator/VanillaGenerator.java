@@ -13,6 +13,8 @@ public class VanillaGenerator extends JavaPlugin {
 			return new vanillagenerator.nms.v1_7_10.ProxyChunkGenerator(Environment.valueOf(split[1].toUpperCase()));
 		} else if (split[0].startsWith("a1_2_6")) {
 			return new vanillagenerator.nms.a1_2_6.ProxyChunkGenerator(Environment.valueOf(split[1].toUpperCase()));
+		} else if (split[0].startsWith("a1_1_2_1")) {
+			return new vanillagenerator.nms.a1_1_2_1.ProxyChunkGenerator();
 		}
 		return null;
 	}
