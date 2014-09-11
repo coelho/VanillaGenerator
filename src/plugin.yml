@@ -1,5 +1,5 @@
 name: VanillaGenerator
-main: vanillagenerator.VanillaGenerator
+main: ninja.coelho.vanillagenerator.VanillaGenerator
 version: 1
 load: STARTUP
 depend: [VanillaNMS]
